@@ -23,7 +23,6 @@ def basic_route():
         }
     }
     show_feature = ldclient.get().variation("test-flag", user, False)
-    print(show_feature)
     client_response = "Feature is enabled!" if show_feature else "Not enabled!"
     return client_response
 
@@ -31,7 +30,6 @@ def basic_route():
 @app.route('/canary')
 def canary_route():
     customer_type = request.args.get('customer_type')
-    print(customer_type)
     if customer_type == 'internal_qa':
         user = {
             "key": "internal_testing",
@@ -45,7 +43,6 @@ def canary_route():
         }
 
     show_feature = ldclient.get().variation("internal-customers", user, False)
-    print(show_feature)
     client_feature = True if show_feature == 'qa_enabled' else False
 
     return render_template('user.html', show_feature=client_feature)
